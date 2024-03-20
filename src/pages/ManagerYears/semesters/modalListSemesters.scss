@@ -1,0 +1,81 @@
+.manage-semesters-container {
+  .title {
+    text-align: center;
+  }
+
+  .actions {
+    display: flex;
+
+    .header-left {
+      text-align: left;
+    }
+
+    .header-right {
+      text-align: right;
+
+      .btn_left {
+        margin-right: 7px;
+      }
+
+      .btn_right {
+        margin-left: 7px;
+      }
+    }
+
+  }
+
+  i {
+    padding-right: 7px;
+  }
+
+  .actions {
+    .refresh {
+      margin-right: 10px;
+    }
+  }
+
+  .semester-body {
+    .edit {
+      color: orange;
+      cursor: pointer;
+      padding-right: 10px;
+    }
+
+    .delete {
+      color: red;
+      cursor: pointer;
+    }
+
+
+    .sort-header {
+      display: flex;
+      justify-content: space-between;
+
+      i {
+        cursor: pointer;
+        padding: 0 2px;
+      }
+    }
+
+
+  }
+
+
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  border: 0.5px solid lightgray;
+  padding: 3px;
+
+  input {
+    border: none;
+    outline: none;
+    background: transparent;
+
+    &::placeholder {
+      font-size: 12px;
+    }
+  }
+}
