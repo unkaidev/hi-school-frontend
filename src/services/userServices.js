@@ -84,6 +84,9 @@ const fetchCountAllUserToday = (username, today) => {
 const countUsersByMonth = (year) => {
     return axios.get(`/api/v1/user/count-by-month/${year}`);
 }
+const countUsersInSchoolByYear = (schoolId) => {
+    return axios.get(`/api/v1/user/${schoolId}/count-by-year`);
+}
 
 export {
     loginUser, logoutUser,
@@ -94,5 +97,6 @@ export {
     changeStatusNotification,
     fetchCountUserWithUsername, fetchCountSchoolWithUsername, fetchCountUserToday, fetchCountSchoolToday,
     fetchCountAllUserWithUsername, fetchCountAllUserToday, countUsersByMonth,
+    countUsersInSchoolByYear,
 }
 

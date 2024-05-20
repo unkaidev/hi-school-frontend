@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./modalListSchoolClasses.scss";
-import { fetchAllSchoolClassWithPagination, deleteSchoolClass, getAllSchoolClassForHeadTeacherWithPagination, getAllWithYearIdAndGradeForStudent } from '../../../services/schoolClassService'
+import { fetchAllSchoolClassWithPagination, deleteSchoolClass, getAllSchoolClassForHeadTeacherWithPagination, getAllWithYearIdAndGradeForStudent, getAllSchoolClassWithYearId } from '../../../services/schoolClassService'
 import { getAllWithYearIdAndGradeForHeadTeacher, getAllByYearAndGrade, getASchoolClass } from "../../../services/schoolClassService";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
@@ -268,11 +268,31 @@ const ModalListSchoolClasses = (props) => {
 
     const fetchSchoolClasses = async () => {
         try {
-            const response = await getASchoolClass(selectedClass);
-            console.log(response)
-            if (response && response.dt && response.ec === 0) {
-                setListSchoolClasses([response.dt]);
+            if (selectedGradeLabel == 'Toàn Khối' && !isHeadTeacher && !isStudent) {
+                const response = await getAllSchoolClassWithYearId(selectedYear);
+                console.log(selectedYear)
+                if (response && response.dt && response.ec === 0) {
+                    setListSchoolClasses(response.dt);
+                }
             }
+            else if (selectedClass) {
+                const response = await getASchoolClass(selectedClass);
+                console.log(response)
+                if (response && response.dt && response.ec === 0) {
+                    setListSchoolClasses([response.dt]);
+                }
+            }
+            else {
+                if (!isHeadTeacher && !isStudent) {
+                    const response = await getAllByYearAndGrade(selectedYear, selectedGrade);
+                    console.log(response)
+                    if (response && response.dt && response.ec === 0) {
+                        setListSchoolClasses(response.dt);
+                    }
+                }
+
+            }
+
         } catch (error) {
             console.error('Error sending request:', error);
         }
@@ -313,7 +333,7 @@ const ModalListSchoolClasses = (props) => {
 
                                 </div>
                                 <div className="actions my-3">
-                                    <div className="header-left col-6">
+                                    <div className="header-left col-4">
                                         <button
                                             className="btn btn-success refresh"
                                             onClick={handleRefresh}
@@ -339,7 +359,7 @@ const ModalListSchoolClasses = (props) => {
 
                                     </div>
 
-                                    <div className="header-right col-6">
+                                    <div className="header-right col-8">
                                         <div className="row">
                                             <div className="col">
                                                 <Select
@@ -349,22 +369,34 @@ const ModalListSchoolClasses = (props) => {
                                                     placeholder="Chọn năm học"
                                                 />
                                             </div>
-                                            <div className="col">
-                                                <Select
-                                                    value={{ value: selectedGrade, label: selectedGradeLabel }}
-                                                    onChange={handleGradeChange}
-                                                    options={[{ value: '', label: 'Chọn khối học' }, ...grades.map(grade => ({ value: grade.id, label: grade.name }))]}
-                                                    placeholder="Chọn khối học"
-                                                />
-                                            </div>
-                                            <div className="col">
-                                                <Select
-                                                    value={{ value: selectedClass, label: selectedClassLabel }}
-                                                    onChange={handleClassChange}
-                                                    options={[{ value: '', label: 'Chọn lớp học' }, ...classes.map(cls => ({ value: cls.id, label: cls.name }))]}
-                                                    placeholder="Chọn lớp học"
-                                                />
-                                            </div>
+                                            {
+                                                selectedYear ?
+                                                    <> <div className="col">
+                                                        <Select
+                                                            value={{ value: selectedGrade, label: selectedGradeLabel }}
+                                                            onChange={handleGradeChange}
+                                                            options={[{ value: '', label: 'Chọn khối học' }, ...grades.map(grade => ({ value: grade.id, label: grade.name }))]}
+                                                            placeholder="Chọn khối học"
+                                                        />
+                                                    </div></>
+                                                    :
+                                                    <><div className="col"></div></>
+                                            }
+                                            {
+                                                selectedGrade ?
+                                                    <> <div className="col">
+                                                        <Select
+                                                            value={{ value: selectedClass, label: selectedClassLabel }}
+                                                            onChange={handleClassChange}
+                                                            options={[{ value: '', label: 'Chọn lớp học' }, ...classes.map(cls => ({ value: cls.id, label: cls.name }))]}
+                                                            placeholder="Chọn lớp học"
+                                                        />
+                                                    </div></>
+                                                    :
+                                                    <><div className="col"></div></>
+                                            }
+
+
                                             <div className="col-1">
                                                 {(selectedYear && selectedGrade) && (
                                                     <button

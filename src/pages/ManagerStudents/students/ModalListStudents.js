@@ -15,7 +15,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 const Students = (props) => {
     const [listStudents, setListStudents] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [currentLimit, setCurrentLimit] = useState(10);
+    const [currentLimit, setCurrentLimit] = useState(20);
     const [totalPages, setTotalPages] = useState(0);
     const [isShowModalDelete, setIsShowModalDelete] = useState(false);
     const [dataModal, setDataModel] = useState({});

@@ -159,7 +159,7 @@ const ModalSemester = (props) => {
                     <div className='col-12 form-role'>
                         <label>Tên kỳ học:(<span className='text-danger'>*</span>):</label>
                         <input
-                            className={validInputs.name ? 'form-control' : 'form-control is-invalid'}
+                            className={validInputs.name ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                             type="text"
                             placeholder='Kỳ học I'
                             value={semesterData.name}
@@ -172,7 +172,7 @@ const ModalSemester = (props) => {
                         <div className="d-flex">
                             <input
                                 placeholder='Ngày bắt đầu: dd/mm/yyyy'
-                                className='form-control mr-2'
+                                className='form-control mr-2 fw-bold'
                                 type="text"
                                 value={semesterData.start_date}
                                 onChange={(event) => handleOnChangeStartDate(event.target.value)}
@@ -180,25 +180,25 @@ const ModalSemester = (props) => {
 
                             <input
                                 placeholder='Ngày kết thúc: dd/mm/yyyy'
-                                className='form-control mr-2'
+                                className='form-control mr-2 fw-bold'
                                 type="text"
                                 value={semesterData.end_date}
                                 onChange={(event) => handleOnChangeEndDate(event.target.value)}
                             />
                         </div>
                         <input
-                            className="form-control mt-2"
+                            className="form-control mt-2 fw-bold"
                             type="text"
                             value={semesterData.study_period}
                             readOnly
                         />
                     </div>
 
-                    <div className='col-12 form-role'>
+                    <div className='col-12 form-role fw-bold'>
                         <label>Năm học(<span className='text-danger'>*</span>):</label>
 
                         <Select
-                            className='basic-single'
+                            className='basic-single fw-bold'
                             classNamePrefix='select'
                             options={yearNames && yearNames.length > 0 ? yearNames.map(yearName => ({ value: yearName, label: yearName })) : []}
                             value={semesterData.schoolYear && semesterData.schoolYear.name ? { value: semesterData.schoolYear.name, label: semesterData.schoolYear.name } : ''}

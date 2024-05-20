@@ -111,30 +111,28 @@ const Sidebar = () => {
                 </Link>
 
                 <p className="title">DANH SÁCH</p>
-                <Link to="/manager-users" style={{ textDecoration: "none" }}>
-                  <li>
-                    <PersonOutlineIcon className="icon" />
-                    <span>Người dùng</span>
-                  </li>
-                </Link>
+
                 <Link to="/years" style={{ textDecoration: "none" }}>
                   <li>
                     <AddHomeWorkIcon className="icon" />
                     <span>Năm học</span>
                   </li>
                 </Link>
-                <Link to="/students" style={{ textDecoration: "none" }}>
-                  <li>
-                    <PeopleAltIcon className="icon" />
-                    <span>Học sinh</span>
-                  </li>
-                </Link>
+
                 <Link to="/teachers" style={{ textDecoration: "none" }}>
                   <li>
                     <Diversity3Icon className="icon" />
                     <span>Giáo viên</span>
                   </li>
                 </Link>
+
+                <Link to="/students" style={{ textDecoration: "none" }}>
+                  <li>
+                    <PeopleAltIcon className="icon" />
+                    <span>Học sinh</span>
+                  </li>
+                </Link>
+
                 <Link to="/schoolClasses" style={{ textDecoration: "none" }}>
                   <li>
                     <GiteIcon className="icon" />
@@ -145,6 +143,12 @@ const Sidebar = () => {
                   <li>
                     <CalendarMonthIcon className="icon" />
                     <span>Lịch giảng dạy</span>
+                  </li>
+                </Link>
+                <Link to="/manager-users" style={{ textDecoration: "none" }}>
+                  <li>
+                    <PersonOutlineIcon className="icon" />
+                    <span>Người dùng</span>
                   </li>
                 </Link>
               </ul>
@@ -161,11 +165,7 @@ const Sidebar = () => {
             <hr />
             <div className="center">
               <ul>
-                <p className="title">MAIN</p>
-                <li>
-                  <DashboardIcon className="icon" />
-                  <span>Bảng điều khiển</span>
-                </li>
+
                 <p className="title">DANH SÁCH</p>
 
                 <Link to="/list-transcripts" style={{ textDecoration: "none" }}>
@@ -201,18 +201,14 @@ const Sidebar = () => {
         {roles.includes('ROLE_USER') && (
           <>
             <div className="top">
-              <Link to="/student" style={{ textDecoration: "none" }}>
+              <Link to="/user" style={{ textDecoration: "none" }}>
                 <span className="logo">HiSchool</span>
               </Link>
             </div>
             <hr />
             <div className="center">
               <ul>
-                <p className="title">MAIN</p>
-                <li>
-                  <DashboardIcon className="icon" />
-                  <span>Bảng điều khiển</span>
-                </li>
+
                 <p className="title">DANH SÁCH</p>
                 <Link to="/list-school-classes" style={{ textDecoration: "none" }}>
                   <li>
@@ -245,10 +241,13 @@ const Sidebar = () => {
             <ul>
               {
                 !roles.includes('ROLE_ADMIN') && (
-                  <li>
-                    <InsertChartIcon className="icon" />
-                    <span>Thống kê</span>
-                  </li>
+                  <Link to="/statistic" style={{ textDecoration: "none" }}>
+                    <li>
+                      <InsertChartIcon className="icon" />
+                      <span>Thống kê</span>
+                    </li>
+                  </Link>
+
                 )
               }
 

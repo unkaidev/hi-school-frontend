@@ -10,11 +10,7 @@ import { getAllSemesterWithSchoolId } from '../../../services/semesterService';
 
 const ModalSchedule = (props) => {
     const { action, dataModalSchedule, show, onHide, schoolId } = props;
-    const [semesterNames, setSemesterNames] = useState([]);
-    const [semesterIds, setSemesterIds] = useState([]);
-    const [semesterSchoolNames, setSemesterSchoolNames] = useState([]);
-
-
+    const [semesters, setSemesters] = useState([]);
 
     const [validTimeInputs, setValidTimeInputs] = useState({
         startTime: true,
@@ -52,8 +48,6 @@ const ModalSchedule = (props) => {
             name: '',
         }
     }
-    const [subjectData, setSubjectData] = useState(defaultSubjectData);
-
     const CheckValidInputs = () => {
         let check = true;
         const requiredFields = ["name", "startTime", "endTime"];
@@ -115,12 +109,12 @@ const ModalSchedule = (props) => {
             try {
                 const semesterResponse = await getAllSemesterWithSchoolId(schoolId);
                 if (semesterResponse && semesterResponse.dt) {
-                    setSemesterNames(semesterResponse.dt.map(semester => semester.name));
-                    setSemesterIds(semesterResponse.dt.map(semester => semester.id));
-                    setSemesterSchoolNames(semesterResponse.dt.map(semester => semester.schoolYear.name));
-                } else {
-                    toast.error('Failed to fetch data');
+                    setSemesters(semesterResponse.dt.map(semester => ({
+                        id: semester.id,
+                        name: `${semester.name}-${semester.schoolYear.name}`
+                    })));
                 }
+
             } catch (error) {
                 console.error('Error fetching data:', error);
                 toast.error('Failed to fetch data');
@@ -181,12 +175,11 @@ const ModalSchedule = (props) => {
 
     };
     const handleOnChangeSemester = (selectedOption, name) => {
-        const { value, label } = selectedOption;
         setScheduleData(prevSubjectData => ({
             ...prevSubjectData,
             semester: {
-                id: value,
-                name: label.split(" (ID:")[0].trim()
+                id: selectedOption.value,
+                name: selectedOption.label
             }
         }));
     };
@@ -204,7 +197,7 @@ const ModalSchedule = (props) => {
                         <label>Tên tiết học:(<span className='text-danger'>*</span>):</label>
                         <input
                             placeholder='Tiết 1'
-                            className={validInputs.name ? 'form-control' : 'form-control is-invalid'}
+                            className={validInputs.name ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                             type="text"
                             value={scheduleData.name}
                             onChange={(event) => handleOnChangeInput(event.target.value, "name")}
@@ -213,7 +206,7 @@ const ModalSchedule = (props) => {
                     <div className='col-6 form-role'>
                         <label>Giờ bắt đầu:(<span className='text-danger'>*</span>):</label>
                         <input
-                            className={validTimeInputs.startTime ? 'form-control' : 'form-control is-invalid'}
+                            className={validTimeInputs.startTime ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                             type="text"
                             pattern="[0-9]{2}:[0-9]{2}"
                             placeholder="HH:mm"
@@ -225,7 +218,7 @@ const ModalSchedule = (props) => {
                     <div className='col-6 form-role'>
                         <label>Giờ kết thúc:(<span className='text-danger'>*</span>):</label>
                         <input
-                            className={validTimeInputs.endTime ? 'form-control' : 'form-control is-invalid'}
+                            className={validTimeInputs.endTime ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                             type="text"
                             pattern="[0-9]{2}:[0-9]{2}"
                             placeholder="HH:mm"
@@ -237,15 +230,16 @@ const ModalSchedule = (props) => {
                     <div className='col-12 form-role'>
                         <label>Kỳ học(<span className='text-danger'>*</span>):</label>
                         <Select
-                            className='basic-single'
+                            className='basic-single fw-bold'
                             classNamePrefix='select'
-                            options={semesterNames && semesterNames.length > 0 ? semesterNames.map((semesterName, index) => ({
-                                value: semesterIds[index],
-                                label: `${semesterName} (ID: ${semesterIds[index]} - ${semesterSchoolNames[index]}) `
+                            options={semesters && semesters.length > 0 ? semesters.map(semester => ({
+                                value: semester.id,
+                                label: semester.name
                             })) : []}
                             value={scheduleData.semester && scheduleData.semester.id && scheduleData.semester.name ? {
-                                value: scheduleData.semester.id, label: `${scheduleData.semester.name} (ID: ${scheduleData.semester.id})`
+                                value: scheduleData.semester.id, label: `${scheduleData.semester.name}-${scheduleData.semester.schoolYear ? scheduleData.semester.schoolYear.name : ''}`
                             } : ''}
+
                             onChange={(selectedOption) => handleOnChangeSemester(selectedOption, "semester")}
                             placeholder="Kỳ học..."
                         />

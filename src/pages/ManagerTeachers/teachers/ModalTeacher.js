@@ -24,9 +24,9 @@ const ModalTeacher = (props) => {
         firstName: '',
         lastName: '',
         dateOfBirth: '',
-        gender: '',
-        nationality: '',
-        ethnicity: '',
+        gender: 'Nam',
+        nationality: 'Việt Nam',
+        ethnicity: 'Kinh',
         citizenId: '',
         issuedDate: '',
         firstWorkDate: '',
@@ -311,7 +311,7 @@ const ModalTeacher = (props) => {
                                         <label>Họ(<span className='text-danger'>*</span>):</label>
                                         <input
                                             placeholder='Nguyễn Văn..'
-                                            className={validInputs.firstName ? 'form-control' : 'form-control is-invalid'}
+                                            className={validInputs.firstName ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                                             type="text" value={teacherData.firstName}
                                             onChange={(event) => handleOnChangeInput(event.target.value, "firstName")}
                                         />
@@ -320,7 +320,7 @@ const ModalTeacher = (props) => {
                                         <label>Tên(<span className='text-danger'>*</span>):</label>
                                         <input
                                             placeholder='A...'
-                                            className={validInputs.lastName ? 'form-control' : 'form-control is-invalid'}
+                                            className={validInputs.lastName ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                                             type="text" value={teacherData.lastName}
                                             onChange={(event) => handleOnChangeInput(event.target.value, "lastName")}
                                         />
@@ -338,7 +338,7 @@ const ModalTeacher = (props) => {
                                         <label>Ngày sinh:(<span className='text-danger'>*</span>):</label>
                                         <input
                                             placeholder='dd/mm/yyyy'
-                                            className={validInputs.dateOfBirth ? 'form-control' : 'form-control is-invalid'}
+                                            className={validInputs.dateOfBirth ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                                             type="text"
                                             pattern="\d{2}/\d{2}/\d{4}"
                                             value={teacherData.dateOfBirth}
@@ -349,6 +349,7 @@ const ModalTeacher = (props) => {
                                         <label>Giới tính:</label>
                                         <Select
                                             placeholder="Nam..."
+                                            className='fw-bold'
                                             options={genderOptions}
                                             onChange={(selectedOption) => handleOnChangeInput(selectedOption.value, "gender")}
                                             value={genderOptions.find(option => option.value === teacherData.gender)}
@@ -359,7 +360,7 @@ const ModalTeacher = (props) => {
                                         <label>Quốc tịch:(<span className='text-danger'>*</span>):</label>
                                         <input
                                             placeholder='Việt Nam...'
-                                            className={validInputs.nationality ? 'form-control' : 'form-control is-invalid'}
+                                            className={validInputs.nationality ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                                             type="text" value={teacherData.nationality}
                                             onChange={(event) => handleOnChangeInput(event.target.value, "nationality")}
                                         />
@@ -368,7 +369,7 @@ const ModalTeacher = (props) => {
                                         <label>Dân tộc:(<span className='text-danger'>*</span>):</label>
                                         <input
                                             placeholder='Kinh...'
-                                            className={validInputs.ethnicity ? 'form-control' : 'form-control is-invalid'}
+                                            className={validInputs.ethnicity ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                                             type="text" value={teacherData.ethnicity}
                                             onChange={(event) => handleOnChangeInput(event.target.value, "ethnicity")}
                                         />
@@ -385,7 +386,7 @@ const ModalTeacher = (props) => {
                                         <label>Số CCCD/CMND:(<span className='text-danger'>*</span>):</label>
                                         <input
                                             placeholder='...'
-                                            className={validInputs.citizenId ? 'form-control' : 'form-control is-invalid'}
+                                            className={validInputs.citizenId ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                                             type="text" value={teacherData.citizenId}
                                             onChange={(event) => handleOnChangeInput(event.target.value, "citizenId")}
                                         />
@@ -394,12 +395,12 @@ const ModalTeacher = (props) => {
                                     <div className='col-6'>
                                         <label>Nơi cấp:(<span className='text-danger'>*</span>):</label>
                                         <Select
-                                            className='basic-single'
+                                            className='basic-single fw-bold'
                                             classNamePrefix='select'
                                             options={issuedPlaceNames && issuedPlaceNames.length > 0 ? issuedPlaceNames.map(issuedPlaceName => ({ value: issuedPlaceName, label: issuedPlaceName })) : []}
                                             value={teacherData.issuedPlace && teacherData.issuedPlace.name ? { value: teacherData.issuedPlace.name, label: teacherData.issuedPlace.name } : ''}
                                             onChange={(selectedOption) => handleOnChangeIssuedPlace(selectedOption.value, "name")}
-                                            placeholder="Search Issued Place..."
+                                            placeholder="Chọn nơi cấp..."
                                         />
                                     </div>
 
@@ -407,7 +408,7 @@ const ModalTeacher = (props) => {
                                         <label>Ngày cấp:(<span className='text-danger'>*</span>):</label>
                                         <input
                                             placeholder='dd/mm/yyyy'
-                                            className={validInputs.issuedDate ? 'form-control' : 'form-control is-invalid'}
+                                            className={validInputs.issuedDate ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                                             type="text"
                                             pattern="\d{2}/\d{2}/\d{4}"
                                             value={teacherData.issuedDate}
@@ -426,7 +427,7 @@ const ModalTeacher = (props) => {
                                         <label>Làm việc từ ngày:(<span className='text-danger'>*</span>):</label>
                                         <input
                                             placeholder='dd/mm/yyyy'
-                                            className={validInputs.firstWorkDate ? 'form-control' : 'form-control is-invalid'}
+                                            className={validInputs.firstWorkDate ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                                             type="text"
                                             pattern="\d{2}/\d{2}/\d{4}"
                                             value={teacherData.firstWorkDate}
@@ -436,12 +437,12 @@ const ModalTeacher = (props) => {
                                     <div className='col-6'>
                                         <label>Nhóm chuyên môn(<span className='text-danger'>*</span>):</label>
                                         <Select
-                                            className='basic-single'
+                                            className='basic-single fw-bold'
                                             classNamePrefix='select'
                                             options={groupNames && groupNames.length > 0 ? groupNames.map(groupName => ({ value: groupName, label: groupName })) : []}
                                             value={teacherData.group ? { value: teacherData.group, label: teacherData.group } : null}
                                             onChange={(selectedOption) => handleOnChangeInput(selectedOption.value, "group")}
-                                            placeholder="Select a group..."
+                                            placeholder="Chọn nhóm..."
                                         />
 
                                     </div>
@@ -457,53 +458,53 @@ const ModalTeacher = (props) => {
                                     <div className='col-3'>
                                         <label>Thành phố(<span className='text-danger'>*</span>):</label>
                                         <Select
-                                            className='basic-single'
+                                            className='basic-single fw-bold'
                                             classNamePrefix='select'
                                             options={cities && cities.length > 0 ? cities.map(city => ({ value: city, label: city })) : []}
                                             value={teacherData.permanentAddress && teacherData.permanentAddress.city ? { value: teacherData.permanentAddress.city, label: teacherData.permanentAddress.city } : null}
                                             onChange={(selectedOption) => handleOnChangePermanentAddress(selectedOption.value, "city")}
-                                            placeholder="Select a city..."
+                                            placeholder="Chọn thành phố..."
                                         />
 
                                     </div>
                                     <div className='col-3'>
                                         <label>Tỉnh(<span className='text-danger'>*</span>):</label>
                                         <Select
-                                            className='basic-single'
+                                            className='basic-single fw-bold'
                                             classNamePrefix='select'
                                             options={provinces && provinces.length > 0 ? provinces.map(province => ({ value: province, label: province })) : []}
                                             value={teacherData.permanentAddress && teacherData.permanentAddress.province ? { value: teacherData.permanentAddress.province, label: teacherData.permanentAddress.province } : null}
                                             onChange={(selectedOption) => handleOnChangePermanentAddress(selectedOption.value, "province")}
-                                            placeholder="Search province..."
+                                            placeholder="Chọn tỉnh..."
                                         />
                                     </div>
                                     <div className='col-3'>
                                         <label>Huyện(<span className='text-danger'>*</span>):</label>
                                         <Select
-                                            className='basic-single'
+                                            className='basic-single fw-bold'
                                             classNamePrefix='select'
                                             options={districts && districts.length > 0 ? districts.map(district => ({ value: district, label: district })) : []}
                                             value={teacherData.permanentAddress && teacherData.permanentAddress.district ? { value: teacherData.permanentAddress.district, label: teacherData.permanentAddress.district } : null}
                                             onChange={(selectedOption) => handleOnChangePermanentAddress(selectedOption.value, "district")}
-                                            placeholder="Search district..."
+                                            placeholder="Chọn huyện..."
                                         />
                                     </div>
                                     <div className='col-3'>
                                         <label>Phường/Xã(<span className='text-danger'>*</span>):</label>
                                         <Select
-                                            className='basic-single'
+                                            className='basic-single fw-bold'
                                             classNamePrefix='select'
                                             options={wardCommunes && wardCommunes.length > 0 ? wardCommunes.map(wardCommune => ({ value: wardCommune, label: wardCommune })) : []}
                                             value={teacherData.permanentAddress && teacherData.permanentAddress.wardCommune ? { value: teacherData.permanentAddress.wardCommune, label: teacherData.permanentAddress.wardCommune } : null}
                                             onChange={(selectedOption) => handleOnChangePermanentAddress(selectedOption.value, "wardCommune")}
-                                            placeholder="Search ward/commune..."
+                                            placeholder="Chọn phường/xã..."
                                         />
                                     </div>
 
                                     <div className='col-12'>
                                         <label>Khác:</label>
                                         <input
-                                            className='form-control'
+                                            className='form-control fw-bold'
                                             type="text"
                                             value={teacherData.permanentAddress && teacherData.permanentAddress.other}
                                             onChange={(event) => handleOnChangePermanentAddress(event.target.value, "other")}
@@ -523,18 +524,18 @@ const ModalTeacher = (props) => {
                                     <div className='col-3'>
                                         <label>Thành phố(<span className='text-danger'>*</span>):</label>
                                         <Select
-                                            className='basic-single'
+                                            className='basic-single fw-bold'
                                             classNamePrefix='select'
                                             options={cities && cities.length > 0 ? cities.map(city => ({ value: city, label: city })) : []}
                                             value={teacherData.contactAddress && teacherData.contactAddress.city ? { value: teacherData.contactAddress.city, label: teacherData.contactAddress.city } : null}
                                             onChange={(selectedOption) => handleOnChangeContactAddress(selectedOption.value, "city")}
-                                            placeholder="Search city..."
+                                            placeholder="Chọn thành phố..."
                                         />
                                     </div>
                                     <div className='col-3'>
                                         <label>Tỉnh(<span className='text-danger'>*</span>):</label>
                                         <Select
-                                            className='basic-single'
+                                            className='basic-single fw-bold'
                                             classNamePrefix='select'
                                             options={provinces && provinces.length > 0 ? provinces.map(province => ({ value: province, label: province })) : []}
                                             value={teacherData.contactAddress && teacherData.contactAddress.province ? { value: teacherData.contactAddress.province, label: teacherData.contactAddress.province } : null}
@@ -545,30 +546,30 @@ const ModalTeacher = (props) => {
                                     <div className='col-3'>
                                         <label>Huyện(<span className='text-danger'>*</span>):</label>
                                         <Select
-                                            className='basic-single'
+                                            className='basic-single fw-bold'
                                             classNamePrefix='select'
                                             options={districts && districts.length > 0 ? districts.map(district => ({ value: district, label: district })) : []}
                                             value={teacherData.contactAddress && teacherData.contactAddress.district ? { value: teacherData.contactAddress.district, label: teacherData.contactAddress.district } : null}
                                             onChange={(selectedOption) => handleOnChangeContactAddress(selectedOption.value, "district")}
-                                            placeholder="Search district..."
+                                            placeholder="Chọn huyện..."
                                         />
                                     </div>
                                     <div className='col-3'>
                                         <label>Phường/Xã(<span className='text-danger'>*</span>):</label>
                                         <Select
-                                            className='basic-single'
+                                            className='basic-single fw-bold'
                                             classNamePrefix='select'
                                             options={wardCommunes && wardCommunes.length > 0 ? wardCommunes.map(wardCommune => ({ value: wardCommune, label: wardCommune })) : []}
                                             value={teacherData.contactAddress && teacherData.contactAddress.wardCommune ? { value: teacherData.contactAddress.wardCommune, label: teacherData.contactAddress.wardCommune } : null}
                                             onChange={(selectedOption) => handleOnChangeContactAddress(selectedOption.value, "wardCommune")}
-                                            placeholder="Search ward/commune..."
+                                            placeholder="Chọn phường/xã..."
                                         />
                                     </div>
 
                                     <div className='col-12'>
                                         <label>Khác:</label>
                                         <input
-                                            className='form-control'
+                                            className='form-control fw-bold'
                                             type="text"
                                             value={teacherData.contactAddress && teacherData.contactAddress.other}
                                             onChange={(event) => handleOnChangeContactAddress(event.target.value, "other")}
@@ -585,21 +586,21 @@ const ModalTeacher = (props) => {
                                     style={{ border: 'gray solid 1px', borderRadius: '10px' }}
                                 >
                                     <div className='col-6'>
-                                        <label>Username:(<span className='text-danger'>*</span>):</label>
+                                        <label>Username:(<span className='text-danger fst-italic'>Tự động tạo</span>)</label>
                                         <input
                                             disabled={true}
                                             placeholder='...'
-                                            className={validInputs.user.username ? 'form-control' : 'form-control is-invalid'}
+                                            className={validInputs.user.username ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                                             type="text" value={teacherData.user?.username}
                                             onChange={(event) => handleOnChangeUserInput(event.target.value, "username")}
                                         />
                                     </div>
                                     <div className='col-6'>
-                                        <label>Email:(<span className='text-danger'>*</span>):</label>
+                                        <label>Email:(<span className='text-danger fst-italic'>Tự động tạo</span>)</label>
                                         <input
                                             disabled={true}
                                             placeholder='...'
-                                            className={validInputs.user.username ? 'form-control' : 'form-control is-invalid'}
+                                            className={validInputs.user.username ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                                             type="text" value={teacherData.user?.email}
                                             onChange={(event) => handleOnChangeUserInput(event.target.value, "email")}
                                         />

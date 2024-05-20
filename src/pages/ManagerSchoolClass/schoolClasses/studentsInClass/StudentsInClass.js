@@ -20,7 +20,7 @@ const Students = (props) => {
 
     const [listStudents, setListStudents] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [currentLimit, setCurrentLimit] = useState(5);
+    const [currentLimit, setCurrentLimit] = useState(20);
     const [totalPages, setTotalPages] = useState(0);
     const [isShowModalRemove, setIsShowModalRemove] = useState(false);
     const [dataModal, setDataModel] = useState({});
@@ -267,13 +267,18 @@ const Students = (props) => {
                                                     <i className="fa fa-minus"></i>Xóa nhiều
                                                 </button>
                                             )}
+                                            {
+                                                isHeadTeacher || isStudent ?
+                                                    <></>
+                                                    :
+                                                    <><div className="mt-3">
+                                                        <p>
+                                                            Số học sinh đã chọn: {(selectedStudents.length) ? (selectedStudents.length) : 0}
+                                                        </p>
+                                                        Tổng số học sinh: {(listStudents.length) ? (listStudents.length) : 0}
+                                                    </div></>
+                                            }
 
-                                            <div className="mt-3">
-                                                <p>
-                                                    Số học sinh đã chọn: {(selectedStudents.length) ? (selectedStudents.length) : 0}
-                                                </p>
-                                                Tổng số học sinh: {(listStudents.length) ? (listStudents.length) : 0}
-                                            </div>
                                         </div>
 
                                         <div className="header-right col-6 ">
@@ -347,7 +352,12 @@ const Students = (props) => {
                                                 <th scope="col">Địa chỉ liên lạc</th>
                                                 <th scope="col">Tên phụ huynh</th>
                                                 <th scope="col">Tên tài khoản</th>
-                                                <th scope="col">Hành động</th>
+                                                {
+                                                    isHeadTeacher || isStudent ?
+                                                        <></>
+                                                        :
+                                                        <><th scope="col" colspan="2">Hành động</th></>
+                                                }
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -357,7 +367,7 @@ const Students = (props) => {
                                                         return (
                                                             <tr key={`row-${index}`} className={isSelected(item.id) ? "table-active" : ""}>
                                                                 {
-                                                                    isHeadTeacher ?
+                                                                    isHeadTeacher || isStudent ?
                                                                         <></>
                                                                         :
                                                                         <>

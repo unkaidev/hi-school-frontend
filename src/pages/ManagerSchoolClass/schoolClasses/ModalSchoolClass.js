@@ -155,10 +155,16 @@ const ModalSchoolClass = (props) => {
         };
         setSchoolClassData(prevSchoolClassData => ({
             ...prevSchoolClassData,
-            schoolYear: selectedYear
+            schoolYear: {
+                ...prevSchoolClassData.schoolYear,
+                id: selectedYear.id,
+                name: selectedYear.name,
+                schoolId: schoolId
+            }
         }));
         fetchData(selectedYear.id);
     };
+
 
 
     const handleOnChangeTeacher = (selectedOption, field) => {
@@ -184,7 +190,7 @@ const ModalSchoolClass = (props) => {
                     <div className='col-12 form-role'>
                         <label>Tên lớp học:(<span className='text-danger'>*</span>):</label>
                         <input
-                            className={validInputs.name ? 'form-control' : 'form-control is-invalid'}
+                            className={validInputs.name ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                             type="text"
                             placeholder='10A1...'
                             value={schoolClassData.name}
@@ -194,7 +200,7 @@ const ModalSchoolClass = (props) => {
                     <div className='col-12 form-role'>
                         <label>Năm học(<span className='text-danger'>*</span>):</label>
                         <Select
-                            className='basic-single'
+                            className='basic-single fw-bold'
                             classNamePrefix='select'
                             options={years && years.length > 0 ? years.map(year => ({ value: year.id, label: year.name })) : []}
                             value={schoolClassData.schoolYear && schoolClassData.schoolYear.id ? { value: schoolClassData.schoolYear.id, label: schoolClassData.schoolYear.name } : null}
@@ -208,7 +214,7 @@ const ModalSchoolClass = (props) => {
                         <label>Khối học(<span className='text-danger'>*</span>):</label>
 
                         <Select
-                            className='basic-single'
+                            className='basic-single fw-bold'
                             classNamePrefix='select'
                             options={gradeNames && gradeNames.length > 0 ? gradeNames.map(gradeName => ({ value: gradeName, label: gradeName })) : []}
                             value={schoolClassData.grade ? { value: schoolClassData.grade, label: schoolClassData.grade } : ''}
@@ -221,7 +227,7 @@ const ModalSchoolClass = (props) => {
                         <label>Giáo viên chủ nhiệm(<span className='text-danger'>*</span>):</label>
 
                         <Select
-                            className='basic-single'
+                            className='basic-single fw-bold'
                             classNamePrefix='select'
                             options={teachers && teachers.length > 0 ? teachers.map(teacher => ({ value: teacher.name, label: teacher.name, firstName: teacher.firstName, lastName: teacher.lastName, id: teacher.id })) : []}
                             value={schoolClassData.teacher ? { value: `${schoolClassData.teacher.firstName} ${schoolClassData.teacher.lastName}`, label: `${schoolClassData.teacher.firstName} ${schoolClassData.teacher.lastName}` } : null}

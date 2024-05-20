@@ -47,7 +47,7 @@ const Attendances = (props) => {
     })
     const [listAttendances, setListAttendances] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [currentLimit, setCurrentLimit] = useState(5);
+    const [currentLimit, setCurrentLimit] = useState(20);
     const [totalPages, setTotalPages] = useState(0);
     const [sortBy, setSortBy] = useState("asc");
     const [sortField, setSortField] = useState("id");

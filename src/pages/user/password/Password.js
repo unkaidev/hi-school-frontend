@@ -114,7 +114,7 @@ const Password = (props) => {
                                             <label>Họ(<span className='text-danger'>*</span>):</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text" value={account ? account?.firstName : "SOMEONE"}
                                             />
                                         </div>
@@ -122,7 +122,7 @@ const Password = (props) => {
                                             <label>Tên(<span className='text-danger'>*</span>):</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text" value={account ? account?.lastName : "SOMEONE"}
                                             />
                                         </div>
@@ -137,7 +137,7 @@ const Password = (props) => {
                                             <label>Username:(<span className='text-danger'>*</span>):</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text" value={account ? account.user?.username : username}
                                             />
                                         </div>
@@ -145,7 +145,7 @@ const Password = (props) => {
                                             <label>Email:(<span className='text-danger'>*</span>):</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text" value={account ? account.user?.email : email}
                                             />
                                         </div>

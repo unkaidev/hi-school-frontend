@@ -11,6 +11,7 @@ import { toggleDarkMode, setDarkMode, setLightMode } from '../../redux/actions/d
 import { useEffect, useState } from "react";
 import { fetchUserWithUsername, fetchCountNotificationUnReadWithUsername } from "../../services/userServices";
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import Transcripts from "../../pages/ManagerStudents/transcripts/Transcripts";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const Navbar = () => {
       setNotificationCountUnRead(notificationResponse.dt)
     }
   }
+  const fullName = `${account?.firstName} ${account?.lastName}`
 
 
   return (
@@ -70,7 +72,7 @@ const Navbar = () => {
               src={account && account?.avatar ? account.avatar : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}
               className="avatar"
             />
-            {account ? `${account?.firstName} ${account?.lastName}` : username}
+            {account ? fullName : username}
           </div>
 
         </div>

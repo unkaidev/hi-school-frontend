@@ -3,6 +3,7 @@ import axios from '../setups/customize-axios';
 const fetchATeacherWithClassId = (classId) => {
     return axios.get(`/api/v1/teacher/get/${classId}`);
 }
+
 const fetchAllTeacherWithPagination = (page, limit, schoolId) => {
     return axios.get(`/api/v1/teacher/read?page=${page}&limit=${limit}&schoolId=${schoolId}`);
 }
@@ -45,6 +46,6 @@ export {
     fetchAllTeacherWithPagination, deleteTeacher, createNewTeacher, updateCurrentTeacher,
     getAllGroupName, getAllTeacherWithSchoolId, getAllTeacherBySchoolAndGroup, getAllTeacherBySchoolAndGroupReady,
     fetchATeacherWithClassId, getAllTeacherReadyWithSchoolIdAndYearId,
-    fetchLatestTeacher
+    fetchLatestTeacher,
 }
 

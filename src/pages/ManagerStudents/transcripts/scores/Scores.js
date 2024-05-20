@@ -18,7 +18,7 @@ const Scores = (props) => {
 
     const [listScores, setListScores] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [currentLimit, setCurrentLimit] = useState(5);
+    const [currentLimit, setCurrentLimit] = useState(20);
     const [totalPages, setTotalPages] = useState(0);
     const [isShowModalDelete, setIsShowModalDelete] = useState(false);
     const [dataModal, setDataModel] = useState({});
@@ -36,13 +36,15 @@ const Scores = (props) => {
     const { semesterId, studentId, studentName, className, yearName, termName,
         selectedYear, selectedTerm, selectedClass, selectedTeacher, isHeadTeacher, isTeacher, isStudent } = props.location.state;
 
+    console.log(selectedTeacher)
+
     useEffect(() => {
         fetchScores();
     }, [currentPage]);
 
     const fetchScores = async () => {
         let response;
-        if (!isHeadTeacher && isTeacher) {
+        if (isTeacher) {
             response = await fetchAllScoreOfTeacherWithPagination(currentPage, currentLimit, semesterId, studentId, username);
         }
         else {
@@ -50,6 +52,7 @@ const Scores = (props) => {
         }
 
         let evaluationResponse = await getSemesterEvaluation(semesterId, studentId);
+
         if (response && response.dt && response.ec === 0) {
             setTotalPages(response.dt.totalPages);
             setListScores(response.dt.content);
@@ -288,9 +291,7 @@ const Scores = (props) => {
                                                             }</td>
                                                             <td>{item.teacher?.firstName} {item.teacher?.lastName}</td>
                                                             {
-                                                                !isHeadTeacher && !isTeacher ?
-                                                                    <></>
-                                                                    :
+                                                                (item.teacher.user.username === username) ?
                                                                     <> <td>
                                                                         <span
                                                                             title="Sửa"
@@ -303,6 +304,9 @@ const Scores = (props) => {
                                                                         </span>
 
                                                                     </td></>
+                                                                    :
+                                                                    <></>
+
                                                             }
 
                                                         </tr>

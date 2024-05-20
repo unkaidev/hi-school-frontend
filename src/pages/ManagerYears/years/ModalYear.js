@@ -105,7 +105,7 @@ const ModalYear = (props) => {
                         <input
                             placeholder='Năm học 20xx...'
 
-                            className={validInputs.name ? 'form-control' : 'form-control is-invalid'}
+                            className={validInputs.name ? 'form-control fw-bold' : 'form-control is-invalid fw-bold'}
                             type="text" value={yearData.name}
                             onChange={(event) => handleOnChangeInput(event.target.value, "name")}
                         />

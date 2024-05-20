@@ -451,6 +451,7 @@ const ModalTimeTable = (props) => {
                                     <label>Khối học(<span className='text-danger'>*</span>):</label>
                                     <Select
                                         value={{ value: selectedGrade, label: selectedGradeLabel }}
+                                        className='fw-bold'
                                         onChange={handleGradeChange}
                                         options={[{ value: '', label: 'Chọn Khối học' }, ...gradeNames.map(grade => ({ value: grade, label: grade }))]}
                                         placeholder="Chọn Khối học"
@@ -461,7 +462,7 @@ const ModalTimeTable = (props) => {
 
                                 <label>Môn học(<span className='text-danger'>*</span>):</label>
                                 <Select
-                                    className='basic-single'
+                                    className='basic-single fw-bold'
                                     classNamePrefix='select'
                                     options={subjects && subjects.length > 0 ? subjects.map(subject => ({ value: subject.name, label: subject.name, id: subject.id })) : []}
                                     value={timeTableData.subject && timeTableData.subject.name ? { value: timeTableData.subject.name, label: timeTableData.subject.name } : ''}
@@ -478,7 +479,7 @@ const ModalTimeTable = (props) => {
                         {sClass && (
                             <div>
                                 <input
-                                    className='form-control'
+                                    className='form-control fw-bold'
                                     type="text" value={sClass.name} readOnly />
                             </div>
                         )}
@@ -488,7 +489,7 @@ const ModalTimeTable = (props) => {
                         <label>Tiết học(<span className='text-danger'>*</span>):</label>
                         {action === 'CREATE' ? (
                             <Select
-                                className='basic-single'
+                                className='basic-single fw-bold'
                                 classNamePrefix='select'
                                 options={schedules && schedules.length > 0 ? schedules.map(schedule => ({ value: schedule.id, label: schedule.name })) : []}
                                 value={timeTableData && timeTableData.schedules ? timeTableData.schedules.map(schedule => ({ value: schedule.id, label: schedule.name })) : []}
@@ -498,7 +499,7 @@ const ModalTimeTable = (props) => {
                             />
                         ) : (
                             <Select
-                                className='basic-single'
+                                className='basic-single fw-bold'
                                 classNamePrefix='select'
                                 options={schedules && schedules.length > 0 ? schedules.map(schedule => ({ value: schedule.id, label: schedule.name })) : []}
                                 value={timeTableData.schedule ? { value: timeTableData.schedule.name, label: timeTableData.schedule.name, id: timeTableData.schedule.id } : ''}
@@ -512,7 +513,7 @@ const ModalTimeTable = (props) => {
                             <>
                                 <label>Tuần học(<span className='text-danger'>*</span>):</label>
                                 <Select
-                                    className='basic-single'
+                                    className='basic-single fw-bold'
                                     classNamePrefix='select'
                                     options={timeWeeks && timeWeeks.length > 0 ? timeWeeks.map(timeWeek => ({ value: timeWeek.id, label: timeWeek.name })) : []}
                                     value={timeTableData && timeTableData.timeWeeks ? timeTableData.timeWeeks.map(timeTable => ({ value: timeTable.id, label: timeTable.studyWeek })) : []}
@@ -522,7 +523,7 @@ const ModalTimeTable = (props) => {
                                 />
                                 <label>Ngày(<span className='text-danger'>*</span>):</label>
                                 <Select
-                                    className='basic-single'
+                                    className='basic-single fw-bold'
                                     classNamePrefix='select'
                                     options={timeDays && timeDays.length > 0 ? timeDays.map(timeDay => ({ value: timeDay.id, label: timeDay.name })) : []}
                                     value={timeTableData && timeTableData.timeDays ? timeTableData.timeDays.map(timeTable => ({ value: timeTable.id, label: timeTable.studyDay })) : []}
@@ -537,7 +538,7 @@ const ModalTimeTable = (props) => {
                                 <label>Ngày học(<span className='text-danger'>*</span>):</label>
 
                                 <Select
-                                    className='basic-single'
+                                    className='basic-single fw-bold'
                                     classNamePrefix='select'
                                     options={timeDates && timeDates.length > 0 ? timeDates.map(timeDate => ({ value: timeDate.id, label: timeDate.name })) : []}
                                     value={timeTableData.timeTable ? { value: timeTableData.timeTable.studyDate, label: timeTableData.timeTable.studyDate, id: timeTableData.timeTable.id } : ''}
@@ -554,10 +555,11 @@ const ModalTimeTable = (props) => {
                     <div className='col-12 form-role'>
                         <div className='row py-3'>
                             {action === 'CREATE' &&
-                                <div className='col-6'>
+                                <div className='col-6 '>
                                     <label>Nhóm chuyên môn(<span className='text-danger'>*</span>):</label>
                                     <Select
                                         value={{ value: selectedGroup, label: selectedGroupLabel }}
+                                        className='fw-bold'
                                         onChange={handleGroupChange}
                                         options={[{ value: '', label: 'Chọn Khối học' }, ...groupNames.map(grade => ({ value: grade, label: grade }))]}
                                         placeholder="Chọn Nhóm chuyên môn"
@@ -567,7 +569,7 @@ const ModalTimeTable = (props) => {
                             <div className='col-6'>
                                 <label>Giáo viên(<span className='text-danger'>*</span>):</label>
                                 <Select
-                                    className='basic-single'
+                                    className='basic-single fw-bold'
                                     classNamePrefix='select'
                                     options={teachers && teachers.length > 0 ? teachers.map(teacher => ({ value: `${teacher.firstName} ${teacher.lastName}`, label: `${teacher.firstName} ${teacher.lastName}`, id: teacher.id, firstName: teacher.firstName, lastName: teacher.lastName })) : []}
                                     value={timeTableData.teacher ? { value: `${timeTableData.teacher.firstName} ${timeTableData.teacher.lastName}`, label: `${timeTableData.teacher.firstName} ${timeTableData.teacher.lastName}`, id: timeTableData.teacher.id } : ''}
@@ -582,7 +584,7 @@ const ModalTimeTable = (props) => {
                     <div className='col-12 form-role'>
                         <label>Ghi chú:</label>
                         <input
-                            className='form-control'
+                            className='form-control fw-bold'
                             type="text"
                             value={timeTableData.classComment}
                             onChange={(event) => handleOnChangeInput(event.target.value, "classComment")}

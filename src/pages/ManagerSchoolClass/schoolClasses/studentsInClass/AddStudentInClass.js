@@ -18,7 +18,7 @@ const Students = (props) => {
 
     const [listStudents, setListStudents] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [currentLimit, setCurrentLimit] = useState(5);
+    const [currentLimit, setCurrentLimit] = useState(20);
     const [totalPages, setTotalPages] = useState(0);
     const [isShowModalAdd, setIsShowModalAdd] = useState(false);
     const [dataModal, setDataModel] = useState({});

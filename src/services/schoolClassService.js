@@ -27,9 +27,6 @@ const getAllWithYearIdAndGradeForStudent = (username, yearId, grade) => {
     return axios.get(`/api/v1/schoolClass/student/all-by-grade/${username}/${yearId}/${grade}`);
 }
 
-// const getAllSchoolClassWithSchoolIdForHeadTeacher = (username, schoolId) => {
-//     return axios.get(`/api/v1/schoolClass/all-for-headteacher/${username}/${schoolId}`);
-// }
 const getAllSchoolClassForHeadTeacherWithPagination = (page, limit, username, schoolId) => {
     return axios.get(`/api/v1/schoolClass/${username}/read?page=${page}&limit=${limit}&schoolId=${schoolId}`);
 }

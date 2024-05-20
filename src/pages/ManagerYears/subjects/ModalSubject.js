@@ -9,9 +9,8 @@ import { getAllSemester, getAllSemesterWithSchoolId } from '../../../services/se
 
 const ModalSubject = (props) => {
     const { action, dataModalSubject, show, onHide, schoolId } = props;
-    const [semesterNames, setSemesterNames] = useState([]);
-    const [semesterIds, setSemesterIds] = useState([]);
-    const [semesterSchoolNames, setSemesterSchoolNames] = useState([]);
+    const [semesters, setSemesters] = useState([]);
+
 
     const [subjectNames, setSubjectNames] = useState([]);
 
@@ -47,9 +46,10 @@ const ModalSubject = (props) => {
                     setGradeNames(gradeResponse);
                 }
                 if (semesterResponse && semesterResponse.dt && subjectNamesResponse) {
-                    setSemesterNames(semesterResponse.dt.map(semester => semester.name));
-                    setSemesterIds(semesterResponse.dt.map(semester => semester.id));
-                    setSemesterSchoolNames(semesterResponse.dt.map(semester => semester.schoolYear.name))
+                    setSemesters(semesterResponse.dt.map(semester => ({
+                        id: semester.id,
+                        name: `${semester.name}-${semester.schoolYear.name}`
+                    })));
                     setSubjectNames(subjectNamesResponse)
                 } else {
                     toast.error('Failed to fetch data');
@@ -130,12 +130,11 @@ const ModalSubject = (props) => {
     };
 
     const handleOnChangeSemester = (selectedOption, name) => {
-        const { value, label } = selectedOption;
         setSubjectData(prevSubjectData => ({
             ...prevSubjectData,
             semester: {
-                id: value,
-                name: label.split(" (ID:")[0].trim()
+                id: selectedOption.value,
+                name: selectedOption.label
             }
         }));
     };
@@ -153,7 +152,7 @@ const ModalSubject = (props) => {
                     <div className='col-12 form-role'>
                         <label>Tên môn học(<span className='text-danger'>*</span>):</label>
                         <Select
-                            className='basic-single'
+                            className='basic-single fw-bold'
                             classNamePrefix='select'
                             options={subjectNames && subjectNames.length > 0 ? subjectNames.map(subjectName => ({ value: subjectName, label: subjectName })) : []}
                             value={subjectData.name ? { value: subjectData.name, label: subjectData.name } : ''}
@@ -165,7 +164,7 @@ const ModalSubject = (props) => {
                         <label>Khối học(<span className='text-danger'>*</span>):</label>
 
                         <Select
-                            className='basic-single'
+                            className='basic-single fw-bold'
                             classNamePrefix='select'
                             options={gradeNames && gradeNames.length > 0 ? gradeNames.map(gradeName => ({ value: gradeName, label: gradeName })) : []}
                             value={subjectData.grade ? { value: subjectData.grade, label: subjectData.grade } : ''}
@@ -177,20 +176,19 @@ const ModalSubject = (props) => {
                     <div className='col-12 form-role'>
                         <label>Kỳ học(<span className='text-danger'>*</span>):</label>
                         <Select
-                            className='basic-single'
+                            className='basic-single fw-bold'
                             classNamePrefix='select'
-                            options={semesterNames && semesterNames.length > 0 ? semesterNames.map((semesterName, index) => ({
-                                value: semesterIds[index],
-                                label: `${semesterName} (ID: ${semesterIds[index]} - ${semesterSchoolNames[index]}) `
+                            options={semesters && semesters.length > 0 ? semesters.map(semester => ({
+                                value: semester.id,
+                                label: semester.name
                             })) : []}
                             value={subjectData.semester && subjectData.semester.id && subjectData.semester.name ? {
-                                value: subjectData.semester.id, label: `${subjectData.semester.name} (ID: ${subjectData.semester.id})`
+                                value: subjectData.semester.id, label: `${subjectData.semester.name}-${subjectData.semester.schoolYear ? subjectData.semester.schoolYear.name : ''}`
                             } : ''}
+
                             onChange={(selectedOption) => handleOnChangeSemester(selectedOption, "semester")}
                             placeholder="Kỳ học..."
                         />
-
-
                     </div>
 
 

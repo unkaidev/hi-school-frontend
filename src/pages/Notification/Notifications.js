@@ -18,7 +18,7 @@ const Notifications = (props) => {
 
     const [listNotifications, setListNotifications] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [currentLimit, setCurrentLimit] = useState(5);
+    const [currentLimit, setCurrentLimit] = useState(20);
     const [totalPages, setTotalPages] = useState(0);
     const [sortBy, setSortBy] = useState("asc");
     const [sortField, setSortField] = useState("id");
@@ -234,13 +234,13 @@ const Notifications = (props) => {
                                                                     {item.read ? (
                                                                         < FontAwesomeIcon icon={faToggleOn} className="toggle-icon on fs-3 text-primary"
                                                                             role="button"
-                                                                            title="Có mặt"
+                                                                            title="Đã đọc"
                                                                             onClick={() => toggleRead(item.id)}
                                                                         />
                                                                     ) : (
                                                                         <FontAwesomeIcon icon={faToggleOff} className="toggle-icon off fs-3 text-danger"
                                                                             role="button"
-                                                                            title="Vắng"
+                                                                            title="Chưa đọc"
                                                                             onClick={() => toggleRead(item.id)}
                                                                         />
                                                                     )}

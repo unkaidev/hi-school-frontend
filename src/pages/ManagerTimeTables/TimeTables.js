@@ -332,22 +332,34 @@ const ModalTimeTables = (props) => {
                                                     placeholder="Chọn năm học"
                                                 />
                                             </div>
-                                            <div className="col">
-                                                <Select
-                                                    value={{ value: selectedTerm, label: selectedTermLabel }}
-                                                    onChange={handleTermChange}
-                                                    options={[{ value: '', label: 'Chọn kỳ học' }, ...terms.map(term => ({ value: term.id, label: term.name }))]}
-                                                    placeholder="Chọn kỳ học"
-                                                />
-                                            </div>
-                                            <div className="col">
-                                                <Select
-                                                    value={{ value: selectedClass, label: selectedClassLabel }}
-                                                    onChange={handleClassChange}
-                                                    options={[{ value: '', label: 'Chọn lớp học' }, ...classes.map(cls => ({ value: cls.id, label: cls.name }))]}
-                                                    placeholder="Chọn lớp học"
-                                                />
-                                            </div>
+                                            {
+                                                selectedYear ?
+                                                    <> <div className="col">
+                                                        <Select
+                                                            value={{ value: selectedTerm, label: selectedTermLabel }}
+                                                            onChange={handleTermChange}
+                                                            options={[{ value: '', label: 'Chọn kỳ học' }, ...terms.map(term => ({ value: term.id, label: term.name }))]}
+                                                            placeholder="Chọn kỳ học"
+                                                        />
+                                                    </div></>
+                                                    :
+                                                    <><div className="col"></div></>
+                                            }
+                                            {
+                                                selectedTerm ?
+                                                    <><div className="col">
+                                                        <Select
+                                                            value={{ value: selectedClass, label: selectedClassLabel }}
+                                                            onChange={handleClassChange}
+                                                            options={[{ value: '', label: 'Chọn lớp học' }, ...classes.map(cls => ({ value: cls.id, label: cls.name }))]}
+                                                            placeholder="Chọn lớp học"
+                                                        />
+                                                    </div></>
+                                                    :
+                                                    <><div className="col"></div></>
+                                            }
+
+
                                             <div className="col-1">
                                                 {(selectedYear && selectedTerm && selectedClass) && (
                                                     <button

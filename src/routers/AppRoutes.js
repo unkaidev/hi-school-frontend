@@ -33,6 +33,7 @@ import AttendanceStudents from '../pages/timetables/attendance/StudentsInClass'
 import Profile from '../pages/user/profile/Profile';
 import Password from '../pages/user/password/Password'
 import Notifications from '../pages/Notification/Notifications';
+import Statistic from '../pages/statistic/Statistic';
 
 
 const AppRoutes = () => {
@@ -82,6 +83,8 @@ const AppRoutes = () => {
             <PrivateRoutes path="/profile" component={Profile} requiredRoles={['ROLE_HEADTEACHER', 'ROLE_TEACHER', 'ROLE_USER']} roles={roles} />
             <Route path="/change-password" component={Password} />
             <Route path="/notifications" component={Notifications} />
+            <Route path="/statistic" component={Statistic} requiredRoles={['ROLE_MANAGER', 'ROLE_HEADTEACHER']} roles={roles} />
+
 
 
 

@@ -22,7 +22,7 @@ const Users = (props) => {
 
     const [listUsers, setListUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [currentLimit, setCurrentLimit] = useState(5);
+    const [currentLimit, setCurrentLimit] = useState(10);
     const [totalPages, setTotalPage] = useState(0);
     const [isShowModalDelete, setIsShowModalDelete] = useState(false);
     //modal delete

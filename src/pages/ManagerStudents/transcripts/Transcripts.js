@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./transcripts.scss";
-import { fetchAllTranscriptFromTermAndClass, fetchAllTranscriptFromTermAndClassForStudent, deleteTranscript, deleteManyTimeDate } from '../../../services/transcriptService'
+import { fetchAllTranscriptFromTermAndClass, fetchAllTranscriptFromTermAndClassForStudent, deleteTranscript, deleteManyTimeDate, fetchAllTranscriptFromTerm } from '../../../services/transcriptService'
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
 import ModalTranscript from "./ModalTranscript";
@@ -74,7 +74,7 @@ const Transcripts = (props) => {
             setIsHeadTeacher(true);
             // fetchTranscripts();
         }
-        else if (username && roles && roles.includes('ROLE_TEACHER') && !roles.includes('ROLE_TEACHER')) {
+        else if (username && roles && roles.includes('ROLE_TEACHER') && !roles.includes('ROLE_HEADTEACHER')) {
             setIsTeacher(true);
             // fetchTranscripts();
         }
@@ -204,16 +204,20 @@ const Transcripts = (props) => {
 
     const fetchTeacherData = async () => {
         try {
-            const teacherResponse = await fetchATeacherWithClassId(selectedClass);
-            console.log(teacherResponse.dt)
-            if (teacherResponse && teacherResponse.dt) {
-                const teacher = teacherResponse.dt;
-                setSelectedTeacher({
-                    id: teacher.id,
-                    firstName: teacher.firstName,
-                    lastName: teacher.lastName
-                });
+            if (selectedClass) {
+                const teacherResponse = await fetchATeacherWithClassId(selectedClass);
+                console.log(teacherResponse.dt)
+                if (teacherResponse && teacherResponse.dt) {
+                    const teacher = teacherResponse.dt;
+                    setSelectedTeacher({
+                        id: teacher.id,
+                        username: teacher.user.username,
+                        firstName: teacher.firstName,
+                        lastName: teacher.lastName
+                    });
+                }
             }
+
         } catch (error) {
             console.error('Error fetching teacher data:', error);
             toast.error('Failed to fetch teacher data');
@@ -283,11 +287,11 @@ const Transcripts = (props) => {
             if (isStudent) {
                 classResponse = await getAllSchoolClassWithSemesterIdForStudent(username, selectedTerm);
             }
-            else if (!isHeadTeacher && isTeacher) {
-                classResponse = await getAllSchoolClassWithSemesterIdForTeacher(username, selectedTerm);
-            }
             else if (isHeadTeacher) {
                 classResponse = await getAllSchoolClassWithSemesterIdForHeadTeacher(username, selectedTerm);
+            }
+            else if (isTeacher) {
+                classResponse = await getAllSchoolClassWithSemesterIdForTeacher(username, selectedTerm);
             }
 
             else {
@@ -314,7 +318,13 @@ const Transcripts = (props) => {
                 response = await fetchAllTranscriptFromTermAndClassForStudent(currentPage, currentLimit, selectedTerm, username);
 
             } else {
-                response = await fetchAllTranscriptFromTermAndClass(currentPage, currentLimit, selectedTerm, selectedClass);
+                if (selectedClass) {
+                    response = await fetchAllTranscriptFromTermAndClass(currentPage, currentLimit, selectedTerm, selectedClass);
+                } else {
+                    if (!isHeadTeacher && !isTeacher)
+                        response = await fetchAllTranscriptFromTerm(currentPage, currentLimit, selectedTerm)
+                }
+
             }
             if (response && response.dt && response.ec === 0) {
                 setTotalPages(response.dt.totalPages);
@@ -330,7 +340,11 @@ const Transcripts = (props) => {
         fetchTranscripts();
         fetchTeacherData();
     };
-
+    const handleBack = () => {
+        history.push({
+            pathname: "/schoolClasses",
+        });
+    };
 
 
     return (
@@ -359,6 +373,12 @@ const Transcripts = (props) => {
                                 <div className="actions my-3">
                                     <div className="header-left col-4">
                                         <button
+                                            className="btn btn-warning refresh"
+                                            onClick={handleBack}
+                                        >
+                                            <i className="fa fa-arrow-left"></i>Quay lại lớp học
+                                        </button>
+                                        <button
                                             className="btn btn-success refresh"
                                             onClick={handleRefresh}
                                         >
@@ -377,31 +397,54 @@ const Transcripts = (props) => {
                                                     placeholder="Chọn năm học"
                                                 />
                                             </div>
-                                            <div className="col">
-                                                <Select
-                                                    value={{ value: selectedTerm, label: selectedTermLabel }}
-                                                    onChange={handleTermChange}
-                                                    options={[{ value: '', label: 'Chọn kỳ học' }, ...terms.map(term => ({ value: term.id, label: term.name }))]}
-                                                    placeholder="Chọn kỳ học"
-                                                />
-                                            </div>
-                                            <div className="col">
-                                                <Select
-                                                    value={{ value: selectedClass, label: selectedClassLabel }}
-                                                    onChange={handleClassChange}
-                                                    options={[{ value: '', label: 'Chọn lớp học' }, ...classes.map(cls => ({ value: cls.id, label: cls.name }))]}
-                                                    placeholder="Chọn lớp học"
-                                                />
-                                            </div>
-                                            <div className="col-1">
-                                                {(selectedYear && selectedTerm && selectedClass) && (
-                                                    <button
-                                                        className="btn btn-primary refresh"
+                                            {
+                                                selectedYear ?
+                                                    <> <div className="col">
+                                                        <Select
+                                                            value={{ value: selectedTerm, label: selectedTermLabel }}
+                                                            onChange={handleTermChange}
+                                                            options={[{ value: '', label: 'Chọn kỳ học' }, ...terms.map(term => ({ value: term.id, label: term.name }))]}
+                                                            placeholder="Chọn kỳ học"
+                                                        />
+                                                    </div></>
+                                                    :
+                                                    <><div className="col"></div></>
+                                            }
+                                            {
+                                                selectedTerm ?
+                                                    <> <div className="col">
+                                                        <Select
+                                                            value={{ value: selectedClass, label: selectedClassLabel }}
+                                                            onChange={handleClassChange}
+                                                            options={[{ value: '', label: 'Chọn lớp học' }, ...classes.map(cls => ({ value: cls.id, label: cls.name }))]}
+                                                            placeholder="Chọn lớp học"
+                                                        />
+                                                    </div></>
+                                                    :
+                                                    <><div className="col"></div></>
+                                            }
 
-                                                        onClick={handleSendClick}>
-                                                        <i className="fa fa-download"></i>
-                                                    </button>
-                                                )}
+                                            <div className="col-1">
+                                                {
+                                                    isStudent ?
+                                                        <> {(selectedYear && selectedTerm && selectedClass) && (
+                                                            <button
+                                                                className="btn btn-primary refresh"
+
+                                                                onClick={handleSendClick}>
+                                                                <i className="fa fa-download"></i>
+                                                            </button>
+                                                        )}</>
+                                                        :
+                                                        <> {(selectedYear && selectedTerm) && (
+                                                            <button
+                                                                className="btn btn-primary refresh"
+
+                                                                onClick={handleSendClick}>
+                                                                <i className="fa fa-download"></i>
+                                                            </button>
+                                                        )}</>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -445,9 +488,15 @@ const Transcripts = (props) => {
                                             </th>
                                             <th scope="col">Năm học</th>
                                             <th scope="col">Danh sách điểm</th>
-                                            <th scope="col">Tên giáo viên chủ nhiệm</th>
+                                            {
+                                                selectedClass ?
+                                                    <><th scope="col">Tên giáo viên chủ nhiệm</th></>
+                                                    :
+                                                    <></>
+                                            }
+
                                             <th scope="col">Đánh giá năm học</th>
-                                            {isHeadTeacher ?
+                                            {isHeadTeacher && (username === selectedTeacher.username) ?
                                                 <>
                                                     <th scope="col">Hành động</th>
                                                 </>
@@ -507,13 +556,13 @@ const Transcripts = (props) => {
                                                                     <i className="fa fa-eye"></i>
                                                                 </Link>
                                                             </td>
-                                                            <td>
-                                                                {selectedTeacher && (
-                                                                    <>
-                                                                        {selectedTeacher.firstName} {selectedTeacher.lastName}
-                                                                    </>
-                                                                )}
-                                                            </td>
+                                                            {selectedClass && selectedTeacher ?
+                                                                <>
+                                                                    <td> {selectedTeacher.firstName} {selectedTeacher.lastName}</td>
+                                                                </>
+                                                                :
+                                                                <></>
+                                                            }
                                                             <td>{item.yearEvaluation ?
                                                                 item.yearEvaluation
                                                                 :
@@ -522,7 +571,7 @@ const Transcripts = (props) => {
                                                                 </span>
                                                             }</td>
                                                             {
-                                                                isHeadTeacher ?
+                                                                isHeadTeacher && (username === selectedTeacher.username) ?
                                                                     <>
                                                                         <td>
 

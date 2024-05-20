@@ -71,7 +71,7 @@ const Profile = (props) => {
                                             <label>Họ(<span className='text-danger'>*</span>):</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text" value={account?.firstName}
                                             />
                                         </div>
@@ -79,7 +79,7 @@ const Profile = (props) => {
                                             <label>Tên(<span className='text-danger'>*</span>):</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text" value={account?.lastName}
                                             />
                                         </div>
@@ -96,7 +96,7 @@ const Profile = (props) => {
                                             <label>Ngày sinh:(<span className='text-danger'>*</span>):</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 placeholder='dd/mm/yyyy'
                                                 type="text"
                                                 pattern="\d{2}/\d{2}/\d{4}"
@@ -107,7 +107,7 @@ const Profile = (props) => {
                                             <label>Giới tính:</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text" value={account?.user?.gender}
                                             />
 
@@ -117,7 +117,7 @@ const Profile = (props) => {
                                             <label>Quốc tịch:(<span className='text-danger'>*</span>):</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text" value={account?.nationality}
                                             />
                                         </div>
@@ -125,7 +125,7 @@ const Profile = (props) => {
                                             <label>Dân tộc:(<span className='text-danger'>*</span>):</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text" value={account?.ethnicity}
                                             />
                                         </div>
@@ -140,7 +140,7 @@ const Profile = (props) => {
                                         <div className='col-3'>
                                             <label>Số CCCD/CMND:(<span className='text-danger'>*</span>):</label>
                                             <input
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 disabled={true}
                                                 type="text" value={account?.citizenId}
                                             />
@@ -150,7 +150,7 @@ const Profile = (props) => {
                                             <label>Nơi cấp:(<span className='text-danger'>*</span>):</label>
                                             <Select
                                                 isDisabled={true}
-                                                className='basic-single'
+                                                className='basic-single fw-bold'
                                                 classNamePrefix='select'
                                                 value={account?.issuedPlace && account?.issuedPlace.name ? { value: account?.issuedPlace.name, label: account?.issuedPlace.name } : ''}
                                             />
@@ -160,7 +160,7 @@ const Profile = (props) => {
                                             <label>Ngày cấp:(<span className='text-danger'>*</span>):</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 placeholder='dd/mm/yyyy'
                                                 type="text"
                                                 pattern="\d{2}/\d{2}/\d{4}"
@@ -183,7 +183,7 @@ const Profile = (props) => {
                                             <label>Thành phố(<span className='text-danger'>*</span>):</label>
                                             <Select
                                                 isDisabled={true}
-                                                className='basic-single'
+                                                className='basic-single fw-bold'
                                                 classNamePrefix='select'
                                                 value={account.permanentAddress && account.permanentAddress.city ? { value: account.permanentAddress.city, label: account.permanentAddress.city } : null}
                                             />
@@ -193,7 +193,7 @@ const Profile = (props) => {
                                             <label>Tỉnh(<span className='text-danger'>*</span>):</label>
                                             <Select
                                                 isDisabled={true}
-                                                className='basic-single'
+                                                className='basic-single fw-bold'
                                                 classNamePrefix='select'
                                                 value={account.permanentAddress && account.permanentAddress.province ? { value: account.permanentAddress.province, label: account.permanentAddress.province } : null}
                                             />
@@ -202,7 +202,7 @@ const Profile = (props) => {
                                             <label>Huyện(<span className='text-danger'>*</span>):</label>
                                             <Select
                                                 isDisabled={true}
-                                                className='basic-single'
+                                                className='basic-single fw-bold'
                                                 classNamePrefix='select'
                                                 value={account.permanentAddress && account.permanentAddress.district ? { value: account.permanentAddress.district, label: account.permanentAddress.district } : null}
                                             />
@@ -211,7 +211,7 @@ const Profile = (props) => {
                                             <label>Phường/Xã(<span className='text-danger'>*</span>):</label>
                                             <Select
                                                 isDisabled={true}
-                                                className='basic-single'
+                                                className='basic-single fw-bold'
                                                 classNamePrefix='select'
                                                 value={account.permanentAddress && account.permanentAddress.wardCommune ? { value: account.permanentAddress.wardCommune, label: account.permanentAddress.wardCommune } : null}
                                             />
@@ -221,7 +221,7 @@ const Profile = (props) => {
                                             <label>Khác:</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text"
                                                 value={account.permanentAddress && account.permanentAddress.other}
                                             />
@@ -240,7 +240,7 @@ const Profile = (props) => {
                                             <label>Thành phố(<span className='text-danger'>*</span>):</label>
                                             <Select
                                                 isDisabled={true}
-                                                className='basic-single'
+                                                className='basic-single fw-bold'
                                                 classNamePrefix='select'
                                                 value={account.contactAddress && account.contactAddress.city ? { value: account.contactAddress.city, label: account.contactAddress.city } : null}
                                             />
@@ -249,7 +249,7 @@ const Profile = (props) => {
                                             <label>Tỉnh(<span className='text-danger'>*</span>):</label>
                                             <Select
                                                 isDisabled={true}
-                                                className='basic-single'
+                                                className='basic-single fw-bold'
                                                 classNamePrefix='select'
                                                 value={account.contactAddress && account.contactAddress.province ? { value: account.contactAddress.province, label: account.contactAddress.province } : null}
                                             />
@@ -258,7 +258,7 @@ const Profile = (props) => {
                                             <label>Huyện(<span className='text-danger'>*</span>):</label>
                                             <Select
                                                 isDisabled={true}
-                                                className='basic-single'
+                                                className='basic-single fw-bold'
                                                 classNamePrefix='select'
                                                 value={account.contactAddress && account.contactAddress.district ? { value: account.contactAddress.district, label: account.contactAddress.district } : null}
                                             />
@@ -267,7 +267,7 @@ const Profile = (props) => {
                                             <label>Phường/Xã(<span className='text-danger'>*</span>):</label>
                                             <Select
                                                 isDisabled={true}
-                                                className='basic-single'
+                                                className='basic-single fw-bold'
                                                 classNamePrefix='select'
                                                 value={account.contactAddress && account.contactAddress.wardCommune ? { value: account.contactAddress.wardCommune, label: account.contactAddress.wardCommune } : null}
                                             />
@@ -277,7 +277,7 @@ const Profile = (props) => {
                                             <label>Khác:</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text"
                                                 value={account.contactAddress && account.contactAddress.other}
                                             />
@@ -292,18 +292,18 @@ const Profile = (props) => {
                                         style={{ border: 'gray solid 1px', borderRadius: '10px' }}
                                     >
                                         <div className='col-6'>
-                                            <label>Username:(<span className='text-danger'>*</span>):</label>
+                                            <label>Username:(<span className='text-danger fst-italic'>Tự động tạo</span>)</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text" value={account.user?.username}
                                             />
                                         </div>
                                         <div className='col-6'>
-                                            <label>Email:(<span className='text-danger'>*</span>):</label>
+                                            <label>Email:(<span className='text-danger fst-italic'>Tự động tạo</span>)</label>
                                             <input
                                                 disabled={true}
-                                                className='form-control'
+                                                className='form-control fw-bold'
                                                 type="text" value={account.user?.email}
                                             />
                                         </div>
